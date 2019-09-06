@@ -46,7 +46,7 @@ const FormApartment = ({ setReload }) => {
                     <input 
                         type="text"
                         name="numApartment" 
-                        className="dataInput"
+                        className="dataInput autoInput"
                         value={apartment.numApartment}
                         placeholder="No. Apartment"
                         onChange={handleChange}

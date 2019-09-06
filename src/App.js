@@ -7,7 +7,7 @@ import './App.sass';
 //import { async } from 'q';
 
 const App = () => {
-  const [ apartment, setApartment ] = useState([]);
+  const [ apartments, setApartments ] = useState([]);
   const [ reload, setReload ] = useState(true);
 
   const getApartment = async () => {
@@ -19,7 +19,7 @@ const App = () => {
       }
 
       console.log(res.data);
-      setApartment(res.data)
+      setApartments(res.data)
     } catch (error) {
       console.error(error);
     }
@@ -37,7 +37,7 @@ const App = () => {
         <div className="apartmentForm">
           <FormApartment setReload={setReload}/>
         </div>
-        {/* <ListApartment /> */}
+        <ListApartment apartments={apartments}/>
     </div>
   );
 }
