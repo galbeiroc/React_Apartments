@@ -14,7 +14,7 @@ const App = () => {
     try {
       const res = await axios.get('http://localhost:3100/apartments')
       if(!res) {
-        console.log(`Error Saving Data ${res}`);
+        console.log(`Error Receiving Data ${res}`);
         return
       }
 

@@ -1,6 +1,9 @@
 import React, {useState} from 'react'
+import axios from 'axios';
+import './FormApartment.sass'
 
-const FormAparment = ({ setReload }) => {
+
+const FormApartment = ({ setReload }) => {
     const initialState = {
         numApartment: '',
         meter: '', 
@@ -8,17 +11,37 @@ const FormAparment = ({ setReload }) => {
     }
 
     const [ apartment, setApartment ] = useState(initialState);
+    //console.log(apartment);
 
-    const handleChange =  ({target: {name, value }}) => {
+    const handleChange =  ({ target: {name, value} }) => {
+        console.log(apartment)
         setApartment({
-            ...apartment,
+            ...apartment, 
             [name]: value
         })
+        //console.log(apartment)
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const res = await axios.post('http://localhost:3100/apartments', apartment);
+            if(!res){
+                console.log(`Error Saving Data ${res}`);
+                return
+            }
+            alert('Successfully added!');
+            setReload(true);
+            setApartment(initialState);
+        } catch (error) {
+            console.error(error);
+        }
+
     }
 
     return (
         <div>
-            <form action="" method="post">
+            <form action="" className="form" method="POST" onSubmit={handleSubmit}>
                 <div>
                     <input 
                         type="text"
@@ -60,4 +83,4 @@ const FormAparment = ({ setReload }) => {
     )
 }
 
-export default FormAparment
+export default FormApartment
