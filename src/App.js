@@ -32,13 +32,19 @@ const App = () => {
     }
   },[reload])
 
-  return (
-    <div className="container">
-        <div className="apartmentForm">
-          <FormApartment setReload={setReload}/>
+  return (    
+      <div>
+        <div>
+        <h2 className="feedback">Aparment Test</h2>
         </div>
-        <ListApartment apartments={apartments}/>
-    </div>
+        
+        <div className="container">
+          <div className="apartmentForm">
+            <FormApartment setReload={setReload}/>
+          </div>
+          <ListApartment apartments={apartments}/>
+        </div>
+      </div>
   );
 }
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import ItemApartment from '../ItemApartment'
 import './ListApartment.sass';
 
 const ListApartment = ({apartments}) => {
@@ -11,13 +12,10 @@ const ListApartment = ({apartments}) => {
                 <div className="flex-row">Price</div>
             </div>
             {
-                apartments.map(apartment => (
-                    <div className="flex-table row" key={apartment._id}>
-                        <div className="flex-row" >{apartment.numApartment}</div>
-                        <div className="flex-row">{apartment.meter}</div>
-                        <div className="flex-row">{apartment.price}</div>
-                    </div>
-                ))
+                apartments.map((apartment, index) => {
+                    return <ItemApartment apartment={apartment} key={index}/>
+                }
+                )
             }
         </div>
     )
