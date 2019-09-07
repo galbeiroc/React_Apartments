@@ -11,6 +11,7 @@ const ListApartment = ({apartments}) => {
                 <div className="flex-row">Meters</div>
                 <div className="flex-row">Price</div>
             </div>
+            {/*Go through the matrix to show all the data*/}
             {
                 apartments.map((apartment, index) => {
                     return <ItemApartment apartment={apartment} key={index}/>

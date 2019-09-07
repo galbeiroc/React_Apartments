@@ -4,12 +4,14 @@ import ListApartment from './components/ListApartment';
 import axios from 'axios';
 
 import './App.sass';
-//import { async } from 'q';
+
 
 const App = () => {
-  const [ apartments, setApartments ] = useState([]);
-  const [ reload, setReload ] = useState(true);
+  //Creation of the state apartments, reload
+  const [ apartments, setApartments ] = useState([]); //array
+  const [ reload, setReload ] = useState(true); //boolean
 
+  //Function getApartment gets api data
   const getApartment = async () => {
     try {
       const res = await axios.get('http://localhost:3100/apartments')
@@ -25,7 +27,8 @@ const App = () => {
     }
   }
 
-  useEffect(()=> {
+  //Hook useEffect will be executed if reload change
+    useEffect(()=> {
     if (reload) {
       getApartment();
       setReload(false)
@@ -35,7 +38,7 @@ const App = () => {
   return (    
       <div>
         <div>
-        <h2 className="feedback">Aparment Test</h2>
+        <h2 className="title">Aparment Test</h2>
         </div>
         
         <div className="container">

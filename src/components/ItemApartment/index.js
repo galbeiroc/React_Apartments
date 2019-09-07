@@ -3,10 +3,12 @@ import axios from 'axios';
 import _ from 'lodash';
 import './ItemApartment.sass';
 
-const ItemApartment = ({ apartment: actual }) => {
-    const [ apartment, setApartment  ] = useState(actual);
+const ItemApartment = (props) => {
+    //creation states apartment, edit
+    const [ apartment, setApartment  ] = useState(props.apartment);
     const [ edit, setEdit ] = useState(false);
 
+    //Detect changes on inputs. Capturing event onChange the value on Inputs
     const handleChange = ({ target : {name, value}}) => {
         setApartment({
             ...apartment,
@@ -14,6 +16,7 @@ const ItemApartment = ({ apartment: actual }) => {
         })
     }
 
+    //Function handleDoubleClick active with event onDoubleClick on cell to Edit, 
     const handleDoubleClick = () => {
         if(edit) {
             handleUpdate();
@@ -22,17 +25,20 @@ const ItemApartment = ({ apartment: actual }) => {
         }
     }
 
+    //Function detect press to key Enter on cell to edit, and call to Function handleUpdate
     const handleKeyDown = (e) => {
         if(e.keyCode === 13){
             handleUpdate();
         }
     }
-
-    const handleUpdate = () =>{
+    
+    //Function Update to cell, this 
+    const handleUpdate = async () =>{
         try {
             setEdit(false);
-            if(!_.isEqual(apartment, actual)) {
-                const res = axios.put(`http://localhost:3100/apartments/${apartment._id}`, apartment);
+            //Use lodash _ and function isEqual compare to elements
+            if(!_.isEqual(apartment, props.apartment)) {
+                const res = await axios.put(`http://localhost:3100/apartments/${apartment._id}`, apartment);
                 if(!res) {
                     console.log('Error Updating Apartment');
                     return
@@ -47,7 +53,9 @@ const ItemApartment = ({ apartment: actual }) => {
         }
     }
     return (
+        
         <div className="flex-table row" onDoubleClick={handleDoubleClick} onKeyDown={handleKeyDown}>
+            {/** Call handleDoubleClick at press twice click. The validate state Edit in case is True dealing to show the cell of the rows and pressing the key Enter.*/}
             {edit?
             <>
                 <input type="text"
@@ -71,6 +79,7 @@ const ItemApartment = ({ apartment: actual }) => {
             </>
             :
             <>
+                {/**Show datas on table */}
                 <div className="flex-row">{apartment.numApartment}</div>
                 <div className="flex-row">{apartment.meter}</div>
                 <div className="flex-row">{apartment.price}</div>

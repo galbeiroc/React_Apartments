@@ -4,24 +4,28 @@ import './FormApartment.sass'
 
 
 const FormApartment = ({ setReload }) => {
+    //creation Variable initialState to initialize the empties inputs and restart inputs value
     const initialState = {
         numApartment: '',
         meter: '', 
         price: ''
     }
 
+    //creation state apartment, that receive the variable initialState
     const [ apartment, setApartment ] = useState(initialState);
     //console.log(apartment);
 
+    //Detect changes on inputs. Capturing event onChange the value on Inputs
     const handleChange =  ({ target: {name, value} }) => {
-        console.log(apartment)
+        //console.log(apartment)
         setApartment({
             ...apartment, 
             [name]: value
         })
-        //console.log(apartment)
+
     }
 
+    //Function handleSubmit Send to data at the api
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -32,6 +36,7 @@ const FormApartment = ({ setReload }) => {
             }
             alert('Successfully added!');
             setReload(true);
+            //Restart inputs values
             setApartment(initialState);
         } catch (error) {
             console.error(error);
@@ -84,3 +89,5 @@ const FormApartment = ({ setReload }) => {
 }
 
 export default FormApartment
+
+
